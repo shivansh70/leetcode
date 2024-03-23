@@ -1,0 +1,16 @@
+class NestedIterator(object):
+
+    def __init__(self, nestedList):
+        self.flatten_this_shit = list(reversed(list(self.flatten(nestedList))))
+        
+    def next(self):
+        return self.flatten_this_shit.pop()
+        
+    def hasNext(self):
+        return len(self.flatten_this_shit)
+    
+    def flatten(self, nestedList):
+        for ni_outer in nestedList:
+            if not ni_outer.isInteger():
+                for ni_inner in self.flatten(ni_outer.getList()): yield ni_inner
+            else: yield ni_outer.getInteger()
